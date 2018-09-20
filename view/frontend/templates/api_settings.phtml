@@ -1,0 +1,7 @@
+<?php
+/** @var \MageSuite\GoogleApi\Block\ApiSettings $block */
+$googleApiSettings = $block->getGoogleApiSettings();
+
+if(!empty($googleApiSettings)) {
+    ?><span style="display: none;" id="google-api-settings" data-google-api-key="<?php echo $googleApiSettings['key']; ?>" data-google-api-language="<?php echo $googleApiSettings['language']; ?>" data-google-api-region="<?php echo $googleApiSettings['region']; ?>"></span><?php
+}
