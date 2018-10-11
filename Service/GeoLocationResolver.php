@@ -46,7 +46,7 @@ class GeoLocationResolver
             'timeout' => self::GEOLOCATION_TIMEOUT
         ]);
 
-        if(true or $response->getStatusCode() != 200){
+        if($response->getStatusCode() != 200){
             $message = sprintf('Problem in GeoLocationResolver request, status code: %s, parameters: %s, response: %s', $response->getStatusCode(), implode(',', $params), $response->getBody()->getContents());
             $this->logger->warning($message);
 
