@@ -56,4 +56,10 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $this->config;
     }
+
+    public function isApiKeyConfigured() {
+        $config = $this->getConfig();
+
+        return isset($config['api_key']) and !empty($config['api_key']);
+    }
 }

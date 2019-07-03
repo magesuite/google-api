@@ -30,12 +30,6 @@ class ScriptTag implements \Magento\Framework\View\Element\Block\ArgumentInterfa
         $this->request = $request;
     }
 
-    public function isApiKeyConfigured() {
-        $googleApiSettings = $this->configuration->getGoogleApiSettings();
-
-        return isset($googleApiSettings['key']) and !empty($googleApiSettings['key']);
-    }
-
     public function getApiKey() {
         $googleApiSettings = $this->configuration->getGoogleApiSettings();
 
@@ -43,6 +37,10 @@ class ScriptTag implements \Magento\Framework\View\Element\Block\ArgumentInterfa
     }
 
     public function shouldScriptTagBeRendered() {
+        if(!$this->configuration->isApiKeyConfigured()) {
+            return false;
+        }
+
         $currentActionName = $this->request->getFullActionName();
 
         return in_array($currentActionName, $this->actionsWithScriptTag);
