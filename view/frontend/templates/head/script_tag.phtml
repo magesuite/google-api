@@ -1,0 +1,9 @@
+<?php
+/** @var $block \MageSuite\GoogleApi\Block\Head\ScriptTag */
+/** @var $viewModel \MageSuite\GoogleApi\Model\ViewModel\ScriptTag */
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel->shouldScriptTagBeRendered()): ?>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getApiKey() ?>" src_type="url"></script>
+<?php endif; ?>
