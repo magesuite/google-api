@@ -36,7 +36,18 @@ class ScriptTag implements \Magento\Framework\View\Element\Block\ArgumentInterfa
         return $googleApiSettings['key'];
     }
 
+    public function getFrontendApiKey(){
+        $googleApiSettings = $this->configuration->getGoogleApiSettings();
+
+        if(!empty($googleApiSettings['frontend_key'])){
+            return $googleApiSettings['frontend_key'];
+        }
+
+        return $this->getApiKey();
+    }
+
     public function shouldScriptTagBeRendered() {
+
         if(!$this->configuration->isApiKeyConfigured()) {
             return false;
         }
