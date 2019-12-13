@@ -5,5 +5,5 @@ $viewModel = $block->getViewModel();
 ?>
 
 <?php if ($viewModel->shouldScriptTagBeRendered()): ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getApiKey() ?>" src_type="url"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getFrontendApiKey() ?>" src_type="url"></script>
 <?php endif; ?>
