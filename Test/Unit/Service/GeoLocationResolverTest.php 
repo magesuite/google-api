@@ -15,7 +15,7 @@ class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
      */
     protected $geoLocationResolver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
         $this->geoLocationResolver = $this->objectManager->get(\MageSuite\GoogleApi\Service\GeoLocationResolver::class);
