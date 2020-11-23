@@ -2,26 +2,32 @@
 
 namespace MageSuite\GoogleApi\Helper;
 
-class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Locale\Resolver;
+use Magento\Store\Model\ScopeInterface;
+
+class Configuration extends AbstractHelper
 {
     const GOOGLE_API_CONFIG_PATH = 'google/api';
 
     private $config;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     protected $scopeConfig;
 
     /**
-     * @var \Magento\Framework\Locale\Resolver
+     * @var Resolver
      */
     protected $localeResolver;
 
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface,
-        \Magento\Framework\Locale\Resolver $localeResolver
+        Context $context,
+        ScopeConfigInterface $scopeConfigInterface,
+        Resolver $localeResolver
     ) {
         parent::__construct($context);
 
@@ -35,10 +41,10 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         $localeData = $this->getLocaleData();
 
         return [
-            'key' => $config['api_key'],
+            'key' => $config['api_key'] ?? null,
             'frontend_key' => $config['api_key_frontend'] ?? null,
-            'language' => $localeData[0],
-            'region' => $localeData[1]
+            'language' => $localeData[0] ?? null,
+            'region' => $localeData[1] ?? null
         ];
     }
 
@@ -52,7 +58,7 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
     protected function getConfig()
     {
         if(!$this->config){
-            $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+            $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, ScopeInterface::SCOPE_STORE);
         }
 
         return $this->config;
