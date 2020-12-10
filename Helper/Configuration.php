@@ -35,7 +35,7 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         $localeData = $this->getLocaleData();
 
         return [
-            'key' => $config['api_key'],
+            'key' => $config['api_key'] ?? null,
             'frontend_key' => $config['api_key_frontend'] ?? null,
             'language' => $localeData[0],
             'region' => $localeData[1]
