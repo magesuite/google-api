@@ -37,8 +37,8 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         return [
             'key' => $config['api_key'] ?? null,
             'frontend_key' => $config['api_key_frontend'] ?? null,
-            'language' => $localeData[0],
-            'region' => $localeData[1]
+            'language' => $localeData[0] ?? null,
+            'region' => $localeData[1] ?? null
         ];
     }
 
@@ -58,7 +58,8 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->config;
     }
 
-    public function isApiKeyConfigured() {
+    public function isApiKeyConfigured()
+    {
         $config = $this->getConfig();
 
         return isset($config['api_key']) and !empty($config['api_key']);
