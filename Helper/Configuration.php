@@ -2,32 +2,26 @@
 
 namespace MageSuite\GoogleApi\Helper;
 
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Locale\Resolver;
-use Magento\Store\Model\ScopeInterface;
-
-class Configuration extends AbstractHelper
+class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 {
     const GOOGLE_API_CONFIG_PATH = 'google/api';
 
     private $config;
 
     /**
-     * @var ScopeConfigInterface
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $scopeConfig;
 
     /**
-     * @var Resolver
+     * @var \Magento\Framework\Locale\Resolver
      */
     protected $localeResolver;
 
     public function __construct(
-        Context $context,
-        ScopeConfigInterface $scopeConfigInterface,
-        Resolver $localeResolver
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface,
+        \Magento\Framework\Locale\Resolver $localeResolver
     ) {
         parent::__construct($context);
 
@@ -58,13 +52,14 @@ class Configuration extends AbstractHelper
     protected function getConfig()
     {
         if(!$this->config){
-            $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, ScopeInterface::SCOPE_STORE);
+            $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         }
 
         return $this->config;
     }
 
-    public function isApiKeyConfigured() {
+    public function isApiKeyConfigured()
+    {
         $config = $this->getConfig();
 
         return isset($config['api_key']) and !empty($config['api_key']);
