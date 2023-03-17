@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module id="MageSuite_GoogleApi" name="MageSuite_GoogleApi">
+        <changelog>
+            <tag version="1.1.9" date="2023-03-20">
+                <entry>
+                    <type>FEAT</type>
+                    <overview>Add missing MGS-icon</overview>
+                    <ticket_id>MGS-1316</ticket_id>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>
