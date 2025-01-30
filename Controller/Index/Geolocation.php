@@ -41,12 +41,12 @@ class Geolocation extends \Magento\Framework\App\Action\Action
 
             $result = [
                 'error' => __('Bad Request'),
-                'errorcode' => \Zend\Http\Response::STATUS_CODE_400
+                'errorcode' => \Laminas\Http\Response::STATUS_CODE_400
             ];
 
             $resultJson->setStatusHeader(
-                \Zend\Http\Response::STATUS_CODE_400,
-                \Zend\Http\AbstractMessage::VERSION_11,
+                \Laminas\Http\Response::STATUS_CODE_400,
+                \Laminas\Http\AbstractMessage::VERSION_11,
                 'Bad Request'
             );
 
