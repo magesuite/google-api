@@ -42,6 +42,13 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         ];
     }
 
+    public function getHttpProxy(): string
+    {
+        $config = $this->getConfig();
+
+        return $config['http_proxy'] ?? '';
+    }
+
     protected function getLocaleData()
     {
         $locale = $this->localeResolver->getLocale();
@@ -62,6 +69,6 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $config = $this->getConfig();
 
-        return isset($config['api_key']) and !empty($config['api_key']);
+        return !empty($config['api_key']);
     }
 }
