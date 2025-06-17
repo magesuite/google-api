@@ -5,5 +5,8 @@ $viewModel = $block->getViewModel();
 ?>
 
 <?php if ($viewModel->shouldScriptTagBeRendered()): ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getFrontendApiKey() ?>" src_type="url" rel="preconnect"></script>
+    <!-- loading=async is added to avoid warning. It is highly recommended by Google to set this to async whenever possible, for improved performance. -->
+    <!-- libraries=marker is added for loading libraries. Important for AdvancedMarkerElement -->
+    <!-- v=3.60 is added to support gmpClickable  -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getFrontendApiKey() ?>&loading=async&libraries=marker&v=3.60" src_type="url" rel="preconnect"></script>
 <?php endif; ?>
