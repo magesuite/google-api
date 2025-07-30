@@ -6,10 +6,10 @@ namespace MageSuite\GoogleApi\Service;
 
 class GeoLocationResolver
 {
-    const GEOLOCATION_TIMEOUT = 10;
-    const GEOLOCATION_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
+    protected const GEOLOCATION_TIMEOUT = 10;
+    protected const GEOLOCATION_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-    protected $googleApiParameters = ['key', 'address', 'language', 'region', 'components'];
+    protected array $googleApiParameters = ['key', 'address', 'language', 'region', 'components'];
     protected ?\GuzzleHttp\Client $http = null;
 
     public function __construct(
@@ -32,7 +32,7 @@ class GeoLocationResolver
 
         $response = $this->getClient()->get(self::GEOLOCATION_URL, $options);
 
-        if ($response->getStatusCode() != 200){
+        if ($response->getStatusCode() != 200) {
             $message = sprintf('Problem in GeoLocationResolver request, status code: %s, parameters: %s, response: %s', $response->getStatusCode(), implode(',', $params), $response->getBody()->getContents());
             $this->logger->warning($message);
 
@@ -42,7 +42,7 @@ class GeoLocationResolver
         return json_decode($response->getBody()->getContents());
     }
 
-    public function prepareParameters(array $params)
+    public function prepareParameters(array $params): array
     {
         $params = array_merge($this->configuration->getGoogleApiSettings(), $params);
         $params = array_intersect_key($params, array_flip($this->googleApiParameters));

@@ -1,59 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\GoogleApi\Model\ViewModel;
 
 class ScriptTag implements \Magento\Framework\View\Element\Block\ArgumentInterface
 {
-    /**
-     * @var \MageSuite\GoogleApi\Helper\Configuration
-     */
-    protected $configuration;
+    protected \MageSuite\GoogleApi\Helper\Configuration $configuration;
 
-    /**
-     * @var \Magento\Framework\App\Request\Http
-     */
-    protected $request;
+    protected \Magento\Framework\App\Request\Http $request;
 
-    /**
-     * @var array
-     */
-    protected $actionsWithScriptTag = [];
+    protected array $actionsWithScriptTag = [];
 
     public function __construct(
         \MageSuite\GoogleApi\Helper\Configuration $configuration,
         \Magento\Framework\App\Request\Http $request,
-        $actionsWithScriptTag = []
-    )
-    {
+        array $actionsWithScriptTag = []
+    ) {
         $this->configuration = $configuration;
         $this->actionsWithScriptTag = $actionsWithScriptTag;
         $this->request = $request;
     }
 
-    public function getApiKey() {
+    public function getApiKey(): string
+    {
         $googleApiSettings = $this->configuration->getGoogleApiSettings();
-
         return $googleApiSettings['key'];
     }
 
-    public function getFrontendApiKey(){
+    public function getFrontendApiKey(): string
+    {
         $googleApiSettings = $this->configuration->getGoogleApiSettings();
 
-        if(!empty($googleApiSettings['frontend_key'])){
+        if (!empty($googleApiSettings['frontend_key'])) {
             return $googleApiSettings['frontend_key'];
         }
 
         return $this->getApiKey();
     }
 
-    public function shouldScriptTagBeRendered() {
-
-        if(!$this->configuration->isApiKeyConfigured()) {
+    public function shouldScriptTagBeRendered(): bool
+    {
+        if (!$this->configuration->isApiKeyConfigured()) {
             return false;
         }
 
         $currentActionName = $this->request->getFullActionName();
-
         return in_array($currentActionName, $this->actionsWithScriptTag);
+    }
+
+    public function isConsentRequired(): bool
+    {
+        return $this->configuration->isConsentRequired();
     }
 }
