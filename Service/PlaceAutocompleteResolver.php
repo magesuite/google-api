@@ -31,7 +31,7 @@ class PlaceAutocompleteResolver
         ]);
     }
 
-    public function execute(array $params = []): ?array
+    public function execute(array $params = []): ?\stdClass
     {
         $params = $this->prepareParameters($params);
 
@@ -47,7 +47,7 @@ class PlaceAutocompleteResolver
             return null;
         }
 
-        return json_decode($response->getBody()->getContents());
+        return json_decode($response->getBody()->getContents()) ?: null;
     }
 
     public function prepareParameters(array $params): array
