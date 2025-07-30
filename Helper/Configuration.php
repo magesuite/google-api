@@ -1,35 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\GoogleApi\Helper;
 
 class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const GOOGLE_API_CONFIG_PATH = 'google/api';
+    protected const GOOGLE_API_CONFIG_PATH = 'google/api';
 
-    private $config;
+    protected const GOOGLE_API_CONSENT_REQUIRED_PATH = 'google/api/consent_required';
 
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $scopeConfig;
+    protected array $config = [];
 
-    /**
-     * @var \Magento\Framework\Locale\Resolver
-     */
-    protected $localeResolver;
+    protected \Magento\Framework\Locale\Resolver $localeResolver;
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface,
         \Magento\Framework\Locale\Resolver $localeResolver
     ) {
         parent::__construct($context);
 
-        $this->scopeConfig = $scopeConfigInterface;
         $this->localeResolver = $localeResolver;
     }
 
-    public function getGoogleApiSettings()
+    public function getGoogleApiSettings(): array
     {
         $config = $this->getConfig();
         $localeData = $this->getLocaleData();
@@ -49,26 +43,33 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         return $config['http_proxy'] ?? '';
     }
 
-    protected function getLocaleData()
+    protected function getLocaleData(): array
     {
         $locale = $this->localeResolver->getLocale();
-
         return explode('_', $locale);
     }
 
-    protected function getConfig()
+    protected function getConfig(): array
     {
-        if(!$this->config){
+        if (!$this->config) {
             $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         }
 
         return $this->config;
     }
 
-    public function isApiKeyConfigured()
+    public function isApiKeyConfigured(): bool
     {
         $config = $this->getConfig();
 
         return !empty($config['api_key']);
+    }
+
+    public function isConsentRequired(): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::GOOGLE_API_CONSENT_REQUIRED_PATH,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
 }

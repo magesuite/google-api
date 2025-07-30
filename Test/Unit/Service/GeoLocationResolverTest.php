@@ -1,7 +1,8 @@
 <?php
 
-namespace MageSuite\GoogleApi\Test\Unit\Service;
+declare(strict_types=1);
 
+namespace MageSuite\GoogleApi\Test\Unit\Service;
 
 class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,31 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\GoogleApi\Controller\Index;
 
 class Geolocation extends \Magento\Framework\App\Action\Action
 {
-    /**
-     * @var \MageSuite\GoogleApi\Service\GeoLocationResolver
-     */
-    protected $geoLocationResolver;
+    protected \MageSuite\GoogleApi\Service\GeoLocationResolver $geoLocationResolver;
 
-    /**
-     * @var \Magento\Framework\Data\Form\FormKey\Validator
-     */
-    protected $formKeyValidator;
+    protected \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator;
 
-    /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
-     */
-    protected $resultJsonFactory;
+    protected \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory;
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \MageSuite\GoogleApi\Service\GeoLocationResolver $geoLocationResolver,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
-    )
-    {
+    ) {
         parent::__construct($context);
 
         $this->geoLocationResolver = $geoLocationResolver;
@@ -33,7 +25,7 @@ class Geolocation extends \Magento\Framework\App\Action\Action
         $this->resultJsonFactory = $resultJsonFactory;
     }
 
-    public function execute()
+    public function execute(): \Magento\Framework\Controller\Result\Json
     {
         $resultJson = $this->resultJsonFactory->create();
 

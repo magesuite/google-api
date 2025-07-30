@@ -1,12 +1,24 @@
 <?php
-/** @var $block \MageSuite\GoogleApi\Block\Head\ScriptTag */
-/** @var $viewModel \MageSuite\GoogleApi\Model\ViewModel\ScriptTag */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \MageSuite\GoogleApi\Block\Head\ScriptTag $block */
+/** @var \MageSuite\GoogleApi\Model\ViewModel\ScriptTag $viewModel */
 $viewModel = $block->getViewModel();
+$isConsentRequired = $viewModel->isConsentRequired();
 ?>
 
 <?php if ($viewModel->shouldScriptTagBeRendered()): ?>
     <!-- loading=async is added to avoid warning. It is highly recommended by Google to set this to async whenever possible, for improved performance. -->
     <!-- libraries=marker is added for loading libraries. Important for AdvancedMarkerElement -->
     <!-- v=3.60 is added to support gmpClickable  -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $viewModel->getFrontendApiKey() ?>&loading=async&libraries=marker&v=3.60" src_type="url" rel="preconnect"></script>
+    <script 
+        <?php if ($isConsentRequired): ?>
+            type="text/html"
+            data-consent-service-required="true"
+            data-consent-service="googlemaps"
+        <?php endif; ?>
+        src="https://maps.googleapis.com/maps/api/js?key=<?= $escaper->escapeUrl($viewModel->getFrontendApiKey()) ?><?php if (!$isConsentRequired): ?>&loading=async<?php endif; ?>&libraries=marker&v=3.60"
+        src_type="url"
+        rel="preconnect">
+    </script>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.googleApiConsentRequired = ' . ($isConsentRequired ? 'true' : 'false')); ?>
 <?php endif; ?>
