@@ -20,12 +20,19 @@
                     <type>FEATURE</type>
                     <overview>Change script type to text/html and add data attributes required for CMSL</overview>
                     <description>
-                        This change is required in order to allow 
+                        This change is required in order to allow
                         Consent Managed Script Loader (CMSL) to control when
-                        Google Maps API can be loaded. That is when user 
+                        Google Maps API can be loaded. That is when user
                         consent is given.
                     </description>
                     <ticket_id>SCAFA-1208</ticket_id>
+                </entry>
+            </tag>
+            <tag version="1.2.2" date="2025-08-14">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove async to fix 'google is not defined' JS error</overview>
+                    <ticket_id>NKD-5423</ticket_id>
                 </entry>
             </tag>
         </changelog>
