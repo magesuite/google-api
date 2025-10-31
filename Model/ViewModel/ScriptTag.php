@@ -53,4 +53,9 @@ class ScriptTag implements \Magento\Framework\View\Element\Block\ArgumentInterfa
     {
         return $this->configuration->isConsentRequired();
     }
+
+    public function getMapId(): string
+    {
+        return $this->configuration->getMapId() ?: '';
+    }
 }
