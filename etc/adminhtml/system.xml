@@ -19,7 +19,12 @@
                     <comment>If enabled, user consent will be required to load Google API (developers work required)</comment>
                     <frontend_class>cs-csfeature__logo</frontend_class>
                 </field>
-                <field id="http_proxy" translate="label" type="text" sortOrder="30" showInDefault="1">
+                <field id="map_id" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Map ID</label>
+                    <comment>Provide Map ID for custom Google Maps styling. Set `DEMO_MAP_ID` to use default Google Maps styles.</comment>
+                    <frontend_class>cs-csfeature__logo</frontend_class>
+                </field>
+                <field id="http_proxy" translate="label" type="text" sortOrder="40" showInDefault="1">
                     <label>HTTP Proxy</label>
                     <comment><![CDATA[Use proxy for backend calls.]]></comment>
                 </field>

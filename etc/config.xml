@@ -4,6 +4,7 @@
         <google>
             <api>
                 <consent_required>0</consent_required>
+                <map_id>DEMO_MAP_ID</map_id>
             </api>
         </google>
     </default>

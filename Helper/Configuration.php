@@ -7,8 +7,8 @@ namespace MageSuite\GoogleApi\Helper;
 class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 {
     protected const GOOGLE_API_CONFIG_PATH = 'google/api';
-
     protected const GOOGLE_API_CONSENT_REQUIRED_PATH = 'google/api/consent_required';
+    protected const GOOGLE_MAP_ID_PATH = 'google/api/map_id';
 
     protected array $config = [];
 
@@ -71,5 +71,10 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
             self::GOOGLE_API_CONSENT_REQUIRED_PATH,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    public function getMapId(): string
+    {
+        return (string) $this->scopeConfig->getValue(self::GOOGLE_MAP_ID_PATH);
     }
 }
