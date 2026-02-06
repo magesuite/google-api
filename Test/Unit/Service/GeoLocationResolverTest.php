@@ -6,15 +6,8 @@ namespace MageSuite\GoogleApi\Test\Unit\Service;
 
 class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var \MageSuite\GoogleApi\Service\GeoLocationResolver
-     */
-    protected $geoLocationResolver;
+    protected ?\Magento\TestFramework\ObjectManager $objectManager;
+    protected ?\MageSuite\GoogleApi\Service\GeoLocationResolver $geoLocationResolver;
 
     public function setUp(): void
     {
@@ -22,7 +15,15 @@ class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
         $this->geoLocationResolver = $this->objectManager->get(\MageSuite\GoogleApi\Service\GeoLocationResolver::class);
     }
 
-    public static function parametersDataProvider()
+    /**
+     * @dataProvider parametersDataProvider
+     */
+    public function testItReturnsCorrectParameters(array $params, array $expected): void
+    {
+        $this->assertEquals($expected, $this->geoLocationResolver->prepareParameters($params));
+    }
+
+    public static function parametersDataProvider(): array
     {
         return [
             [
@@ -38,15 +39,5 @@ class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
                 ['key' => 'testkey', 'address' => 'Street 1', 'language' => 'DE', 'region' => 'US', 'components' => null]
             ]
         ];
-    }
-
-    /**
-     * @dataProvider parametersDataProvider
-     * @param $params
-     * @param $expected
-     */
-    public function testItReturnsCorrectParameters($params, $expected)
-    {
-        $this->assertEquals($expected, $this->geoLocationResolver->prepareParameters($params));
     }
 }
