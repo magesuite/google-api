@@ -6,13 +6,12 @@ namespace MageSuite\GoogleApi\Test\Unit\Service;
 
 class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
 {
-    protected ?\Magento\TestFramework\ObjectManager $objectManager;
     protected ?\MageSuite\GoogleApi\Service\GeoLocationResolver $geoLocationResolver;
 
     public function setUp(): void
     {
-        $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-        $this->geoLocationResolver = $this->objectManager->get(\MageSuite\GoogleApi\Service\GeoLocationResolver::class);
+        $objectManager = \Magento\TestFramework\ObjectManager::getInstance();
+        $this->geoLocationResolver = $objectManager->get(\MageSuite\GoogleApi\Service\GeoLocationResolver::class);
     }
 
     /**

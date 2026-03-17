@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace MageSuite\GoogleApi\Helper;
 
-class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
+class Configuration
 {
     protected const GOOGLE_API_CONFIG_PATH = 'google/api';
     protected const GOOGLE_API_CONSENT_REQUIRED_PATH = 'google/api/consent_required';
     protected const GOOGLE_MAP_ID_PATH = 'google/api/map_id';
 
-    protected array $config = [];
-
-    protected \Magento\Framework\Locale\Resolver $localeResolver;
-
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\Locale\Resolver $localeResolver
-    ) {
-        parent::__construct($context);
-
-        $this->localeResolver = $localeResolver;
-    }
+        protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        protected \Magento\Framework\Encryption\EncryptorInterface $encryptor,
+        protected \Magento\Framework\Locale\Resolver $localeResolver
+    ) {}
 
     public function getGoogleApiSettings(): array
     {
@@ -29,8 +22,8 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
         $localeData = $this->getLocaleData();
 
         return [
-            'key' => $config['api_key'] ?? null,
-            'frontend_key' => $config['api_key_frontend'] ?? null,
+            'key' => !empty($config['api_key']) ? $this->encryptor->decrypt($config['api_key']) : null,
+            'frontend_key' => !empty($config['api_key_frontend']) ? $this->encryptor->decrypt($config['api_key_frontend']) : null,
             'language' => $localeData[0] ?? null,
             'region' => $localeData[1] ?? null
         ];
@@ -51,11 +44,7 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected function getConfig(): array
     {
-        if (!$this->config) {
-            $this->config = $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        }
-
-        return $this->config;
+        return $this->scopeConfig->getValue(self::GOOGLE_API_CONFIG_PATH, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function isApiKeyConfigured(): bool
