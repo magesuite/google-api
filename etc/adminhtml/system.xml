@@ -28,6 +28,7 @@
                     <label>HTTP Proxy</label>
                     <comment><![CDATA[Use proxy for backend calls.]]></comment>
                 </field>
+                <fieldset_css>cs-csfeature__logo</fieldset_css>
             </group>
         </section>
     </system>
