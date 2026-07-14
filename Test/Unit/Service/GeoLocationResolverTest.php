@@ -14,9 +14,7 @@ class GeoLocationResolverTest extends \PHPUnit\Framework\TestCase
         $this->geoLocationResolver = $objectManager->get(\MageSuite\GoogleApi\Service\GeoLocationResolver::class);
     }
 
-    /**
-     * @dataProvider parametersDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('parametersDataProvider')]
     public function testItReturnsCorrectParameters(array $params, array $expected): void
     {
         $this->assertEquals($expected, $this->geoLocationResolver->prepareParameters($params));
