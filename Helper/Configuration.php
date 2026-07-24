@@ -9,6 +9,7 @@ class Configuration
     protected const GOOGLE_API_CONFIG_PATH = 'google/api';
     protected const GOOGLE_API_CONSENT_REQUIRED_PATH = 'google/api/consent_required';
     protected const GOOGLE_MAP_ID_PATH = 'google/api/map_id';
+    protected const DISTANCE_PROVIDER_HTTP_PROXY_PATH = 'cataloginventory/source_selection_distance_based_google/http_proxy';
 
     public function __construct(
         protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
@@ -34,6 +35,11 @@ class Configuration
         $config = $this->getConfig();
 
         return $config['http_proxy'] ?? '';
+    }
+
+    public function getDistanceProviderHttpProxy(): string
+    {
+        return (string) $this->scopeConfig->getValue(self::DISTANCE_PROVIDER_HTTP_PROXY_PATH);
     }
 
     protected function getLocaleData(): array
