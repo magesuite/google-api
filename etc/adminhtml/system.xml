@@ -33,5 +33,13 @@
                 <fieldset_css>cs-csfeature__logo</fieldset_css>
             </group>
         </section>
+        <section id="cataloginventory">
+            <group id="source_selection_distance_based_google">
+                <field id="http_proxy" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>HTTP Proxy</label>
+                    <comment><![CDATA[Use proxy for backend geocoding calls to the Google API.]]></comment>
+                </field>
+            </group>
+        </section>
     </system>
 </config>
