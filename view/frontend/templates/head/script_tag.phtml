@@ -14,9 +14,7 @@ $isConsentRequired = $viewModel->isConsentRequired();
             data-consent-service-required="true"
             data-consent-service="googlemaps"
         <?php endif; ?>
-        src="https://maps.googleapis.com/maps/api/js?key=<?=$escaper->escapeUrl($viewModel->getFrontendApiKey()) ?>&libraries=marker&v=quarterly"
-        src_type="url"
-        rel="preconnect">
+        src="https://maps.googleapis.com/maps/api/js?key=<?=$escaper->escapeUrl($viewModel->getFrontendApiKey()) ?>&libraries=marker&v=quarterly">
     </script>
     <?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.googleApiConsentRequired = ' . ($isConsentRequired ? 'true' : 'false')); ?>
 <?php endif; ?>
