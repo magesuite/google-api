@@ -35,6 +35,29 @@
                     <ticket_id>NKD-5423</ticket_id>
                 </entry>
             </tag>
+            <tag version="1.2.12" date="2026-09-10">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove Google Maps API script from checkout</overview>
+                    <description>
+                        Checkout does not use the Google Maps JavaScript API - nothing on the
+                        page reads the google object and the address fields rely on the
+                        browser's native autocomplete. Store locator is unaffected, it
+                        registers its own action from magesuite-store-locator.
+                    </description>
+                    <ticket_id>MGS-5714</ticket_id>
+                </entry>
+                <entry>
+                    <type>FIX</type>
+                    <overview>Remove inert rel and src_type attributes from the script tag</overview>
+                    <ticket_id>MGS-5714</ticket_id>
+                </entry>
+                <entry>
+                    <type>FIX</type>
+                    <overview>Reference head.additional as a block instead of a container</overview>
+                    <ticket_id>MGS-5714</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
